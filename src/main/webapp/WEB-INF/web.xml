@@ -7,19 +7,19 @@
     
     <display-name>AWS DevOps Learning Platform</display-name>
     
-    <!-- Home Controller - handles root and index -->
+    <!-- Home Controller - handles root path -->
     <servlet>
         <servlet-name>HomeController</servlet-name>
         <servlet-class>com.awslearning.controller.HomeController</servlet-class>
     </servlet>
+    
+    <!-- Map HomeController to root path "/" -->
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
-        <url-pattern>/home</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>HomeController</servlet-name>
-        <url-pattern>/index</url-pattern>
-    </servlet-mapping>
+    
+    <!-- Map HomeController to /roadmap -->
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/roadmap</url-pattern>
@@ -35,5 +35,6 @@
         <url-pattern>/topics/*</url-pattern>
     </servlet-mapping>
     
-    <!-- Remove welcome-file-list to avoid conflicts -->
+    <!-- DO NOT include welcome-file-list to avoid conflicts -->
+    
 </web-app>

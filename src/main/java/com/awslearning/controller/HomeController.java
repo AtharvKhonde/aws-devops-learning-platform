@@ -1,4 +1,3 @@
-// ===== src/main/java/com/awslearning/controller/HomeController.java =====
 package com.awslearning.controller;
 
 import com.awslearning.service.TopicService;
@@ -14,21 +13,35 @@ public class HomeController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         topicService = new TopicService();
+        System.out.println("HomeController initialized successfully");
     }
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String path = request.getServletPath();
+        String servletPath = request.getServletPath();
+        String pathInfo = request.getPathInfo();
         
-        if (path == null || path.equals("/") || path.equals("/index")) {
+        System.out.println("HomeController - ServletPath: " + servletPath);
+        System.out.println("HomeController - PathInfo: " + pathInfo);
+        System.out.println("HomeController - RequestURI: " + request.getRequestURI());
+        
+        // Handle root path "/" 
+        if (servletPath.equals("/") || servletPath.equals("")) {
+            System.out.println("Serving home page");
             request.setAttribute("topics", topicService.getAllTopics());
             request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
-        } else if (path.equals("/roadmap")) {
+        } 
+        // Handle roadmap
+        else if (servletPath.equals("/roadmap")) {
+            System.out.println("Serving roadmap page");
             request.setAttribute("roadmap", topicService.getDevOpsRoadmap());
             request.getRequestDispatcher("/WEB-INF/jsp/roadmap.jsp").forward(request, response);
         }
+        else {
+            System.out.println("Path not found: " + servletPath);
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
     }
 }
-
