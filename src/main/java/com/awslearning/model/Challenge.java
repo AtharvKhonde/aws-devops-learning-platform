@@ -1,4 +1,4 @@
-// ===== src/main/java/com/awslearning/model/Challenge.java =====
+
 package com.awslearning.model;
 
 import java.util.List;
