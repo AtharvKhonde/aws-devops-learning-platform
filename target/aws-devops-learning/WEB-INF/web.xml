@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    
+    <display-name>AWS DevOps Learning Platform</display-name>
+    
+    <!-- Home Controller -->
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>com.awslearning.controller.HomeController</servlet-class>
+    </servlet>
+    
+    <!-- Map HomeController to specific paths (NOT root "/") -->
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/roadmap</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Topic Controller -->
+    <servlet>
+        <servlet-name>TopicController</servlet-name>
+        <servlet-class>com.awslearning.controller.TopicController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TopicController</servlet-name>
+        <url-pattern>/topics/*</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Welcome file will handle root path -->
+    <welcome-file-list>
+        <welcome-file>home.jsp</welcome-file>
+    </welcome-file-list>
+    
+</web-app>
