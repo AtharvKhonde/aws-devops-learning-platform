@@ -1006,3 +1006,72 @@ function showNotification(message, type = 'info') {
    // Animate in
    setTimeout(() => notification.classList.add('show'), 10);
 }
+
+// Skill tracking functionality
+function toggleSkill(checkbox) {
+    const skillItem = checkbox.parentElement;
+    const isCompleted = checkbox.textContent === '☑';
+    
+    if (isCompleted) {
+        checkbox.textContent = '☐';
+        checkbox.classList.remove('completed');
+        skillItem.classList.remove('completed');
+    } else {
+        checkbox.textContent = '☑';
+        checkbox.classList.add('completed');
+        skillItem.classList.add('completed');
+    }
+    
+    // Save progress to localStorage
+    saveProgress();
+    updateProgressStats();
+}
+
+function saveProgress() {
+    const completedSkills = [];
+    document.querySelectorAll('.skill-checkbox.completed').forEach(checkbox => {
+        const skillName = checkbox.nextElementSibling.textContent;
+        completedSkills.push(skillName);
+    });
+    localStorage.setItem('roadmapProgress', JSON.stringify(completedSkills));
+}
+
+function loadProgress() {
+    const saved = localStorage.getItem('roadmapProgress');
+    if (saved) {
+        const completedSkills = JSON.parse(saved);
+        document.querySelectorAll('.skill-item').forEach(item => {
+            const skillName = item.querySelector('.skill-name').textContent;
+            if (completedSkills.includes(skillName)) {
+                const checkbox = item.querySelector('.skill-checkbox');
+                checkbox.textContent = '☑';
+                checkbox.classList.add('completed');
+                item.classList.add('completed');
+            }
+        });
+    }
+}
+
+function resetProgress() {
+    localStorage.removeItem('roadmapProgress');
+    document.querySelectorAll('.skill-checkbox').forEach(checkbox => {
+        checkbox.textContent = '☐';
+        checkbox.classList.remove('completed');
+        checkbox.parentElement.classList.remove('completed');
+    });
+    updateProgressStats();
+}
+
+function updateProgressStats() {
+    const total = document.querySelectorAll('.skill-item').length;
+    const completed = document.querySelectorAll('.skill-checkbox.completed').length;
+    const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+    
+    console.log(`Progress: ${completed}/${total} (${percentage}%)`);
+}
+
+// Load progress on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadProgress();
+    updateProgressStats();
+});
