@@ -7,6 +7,7 @@
     
     <display-name>AWS DevOps Learning Platform</display-name>
     
+    <!-- Home Controller - handles root and index -->
     <servlet>
         <servlet-name>HomeController</servlet-name>
         <servlet-class>com.awslearning.controller.HomeController</servlet-class>
@@ -15,7 +16,16 @@
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/roadmap</url-pattern>
+    </servlet-mapping>
     
+    <!-- Topic Controller - handles all topic-related pages -->
     <servlet>
         <servlet-name>TopicController</servlet-name>
         <servlet-class>com.awslearning.controller.TopicController</servlet-class>
@@ -29,4 +39,3 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
-
