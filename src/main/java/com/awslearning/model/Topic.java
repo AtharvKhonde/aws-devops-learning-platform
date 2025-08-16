@@ -1,4 +1,3 @@
-
 package com.awslearning.model;
 
 import java.util.List;
