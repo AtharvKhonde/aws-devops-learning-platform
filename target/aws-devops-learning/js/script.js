@@ -1,5 +1,3 @@
-// ===== AWS DevOps Learning Platform - JavaScript ===== //
-
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
