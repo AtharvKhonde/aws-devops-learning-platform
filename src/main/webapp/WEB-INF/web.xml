@@ -7,25 +7,24 @@
     
     <display-name>AWS DevOps Learning Platform</display-name>
     
-    <!-- Home Controller - handles root path -->
+    <!-- Home Controller -->
     <servlet>
         <servlet-name>HomeController</servlet-name>
         <servlet-class>com.awslearning.controller.HomeController</servlet-class>
     </servlet>
     
-    <!-- Map HomeController to root path "/" -->
+    <!-- Map HomeController to specific paths (NOT root "/") -->
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/home</url-pattern>
     </servlet-mapping>
     
-    <!-- Map HomeController to /roadmap -->
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/roadmap</url-pattern>
     </servlet-mapping>
     
-    <!-- Topic Controller - handles all topic-related pages -->
+    <!-- Topic Controller -->
     <servlet>
         <servlet-name>TopicController</servlet-name>
         <servlet-class>com.awslearning.controller.TopicController</servlet-class>
@@ -35,6 +34,9 @@
         <url-pattern>/topics/*</url-pattern>
     </servlet-mapping>
     
-    <!-- DO NOT include welcome-file-list to avoid conflicts -->
+    <!-- Welcome file will handle root path -->
+    <welcome-file-list>
+        <welcome-file>home.jsp</welcome-file>
+    </welcome-file-list>
     
 </web-app>

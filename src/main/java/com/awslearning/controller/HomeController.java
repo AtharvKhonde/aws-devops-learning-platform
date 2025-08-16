@@ -13,7 +13,7 @@ public class HomeController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         topicService = new TopicService();
-        System.out.println("HomeController initialized successfully");
+        System.out.println("HomeController initialized");
     }
     
     @Override
@@ -21,26 +21,19 @@ public class HomeController extends HttpServlet {
             throws ServletException, IOException {
         
         String servletPath = request.getServletPath();
-        String pathInfo = request.getPathInfo();
-        
         System.out.println("HomeController - ServletPath: " + servletPath);
-        System.out.println("HomeController - PathInfo: " + pathInfo);
-        System.out.println("HomeController - RequestURI: " + request.getRequestURI());
         
-        // Handle root path "/" 
-        if (servletPath.equals("/") || servletPath.equals("")) {
-            System.out.println("Serving home page");
+        if (servletPath.equals("/home")) {
+            // Handle /home path - redirect to root or show same content
             request.setAttribute("topics", topicService.getAllTopics());
             request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
         } 
-        // Handle roadmap
         else if (servletPath.equals("/roadmap")) {
-            System.out.println("Serving roadmap page");
+            // Handle roadmap
             request.setAttribute("roadmap", topicService.getDevOpsRoadmap());
             request.getRequestDispatcher("/WEB-INF/jsp/roadmap.jsp").forward(request, response);
         }
         else {
-            System.out.println("Path not found: " + servletPath);
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
